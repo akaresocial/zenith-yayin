@@ -1,0 +1,28 @@
+User-Agent: *
+Allow: /
+Disallow: /yonetim
+Disallow: /api/
+Disallow: /sepet
+Disallow: /odeme
+Disallow: /siparis
+
+User-Agent: OAI-SearchBot
+User-Agent: ChatGPT-User
+User-Agent: GPTBot
+User-Agent: PerplexityBot
+User-Agent: Perplexity-User
+User-Agent: Claude-SearchBot
+User-Agent: Claude-User
+User-Agent: ClaudeBot
+User-Agent: Google-Extended
+User-Agent: Applebot-Extended
+User-Agent: Bingbot
+Allow: /
+Disallow: /yonetim
+Disallow: /api/
+Disallow: /sepet
+Disallow: /odeme
+Disallow: /siparis
+
+Host: https://zenithdiag.com.tr
+Sitemap: https://zenithdiag.com.tr/sitemap.xml

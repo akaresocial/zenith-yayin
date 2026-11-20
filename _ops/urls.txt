@@ -1,0 +1,31 @@
+# otomatik — scripts/package.mjs · biçim: yol beklenen_kod [beklenen_hedef]
+/ 200
+/urunler 200
+/urun/zenith-z5 200
+/urun/zenith-z5/ 301 /urun/zenith-z5
+/karsilastir 200
+/rehber 200
+/rehber/zenith-z5-z7-lite-z7-pro-karsilastirma 200
+/sozluk 200
+/guncellemeler 200
+/llms.txt 200
+/iletisim 200
+/hakkimizda 200
+/sepet 200
+/odeme 200
+/siparis 200
+/siparis-takip 200
+/sitemap.xml 200
+/robots.txt 200
+/version.txt 200
+/api/version.php 200
+/api/catalog.php 200
+/yonetim/ 303
+/yonetim/assets/admin.css 200
+/yonetim 301 /yonetim/
+/_app/bootstrap.php 403
+/_app/cli.php 403
+/yonetim/_inc/admin.php 403
+/.htaccess 403
+/bu-adres-yok-zenith-test 404
+/uploads/z7pro-set-320.webp 200

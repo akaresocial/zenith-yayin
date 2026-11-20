@@ -1,8 +1,11 @@
 # zenithdiag.com.tr — yayın deposu
 
-Bu depo **otomatik oluşturulur**: yalnızca derlenmiş siteyi (`public/`) ve yayın bilgilerini (`_ops/`) içerir. Kaynak kod ayrı
-ve özel bir depodadır. Elle düzenlemeyin.
+Bu depo **otomatik oluşturulur** (kaynak ayrı ve özel depodadır). Elle düzenlemeyin.
 
-- `main` — sunucudaki yayın betiğinin kurduğu son sürüm
-- `seed` — yalnızca ilk kurulumda (veritabanı boşken) yüklenen başlangıç içeriği
-- `.github/workflows/yayin.yml` — her 5 dakikada bir kaynak ve içerik değişikliğini kontrol eder, derler, paketler ve gönderir
+- `public/` — sitenin kendisi: statik sayfalar + PHP sipariş/ödeme/yönetim uçları (sunucuda web köküne kurulur)
+- `_ops/deploy.sh` — sunucuda cron ile çalışan yayın betiği (doğrula → yedekle → kur → canlı test → gerekirse geri dön)
+- `_ops/tetik/` — anlık yayın tetiği (https://tetik.zenithdiag.com.tr/): aynı adımların saf PHP karşılığı
+- `_ops/urls.txt` — kurulum sonrası canlı test listesi · `_ops/SHA256SUMS` — dosya sağlama toplamları
+- `_ops/enabled` — `1` değilse sunucu kurulum yapmaz
+
+Hiçbir şifre, anahtar, sipariş ya da müşteri bilgisi bu depoda bulunmaz; bunlar yalnızca sunucudaki veritabanındadır.
