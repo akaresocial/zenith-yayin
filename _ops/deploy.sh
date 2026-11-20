@@ -1,5 +1,5 @@
 #!/bin/bash
-# zenithdiag.com.tr — sunucu tarafı otomatik yayın (Alastyr cPanel, cron ile 15 dakikada bir — sunucu daha sık izin vermiyor).
+# zenithdiag.com.tr — sunucu tarafı otomatik yayın (Alastyr cPanel penia, kullanıcı hedeftek — hedefteknolojibilisim.com hostingine eklenti alan adı; cron ile 15 dakikada bir — sunucu daha sık izin vermiyor).
 # Anlık yayın ops/tetik/index.php (https://tetik.zenithdiag.com.tr/) ile yapılır: aynı adımların saf PHP karşılığı, aynı kilit ve
 # durum dosyaları. İki betik birlikte değişir; önce bash ops/test/deploy-test.sh.
 #
@@ -18,14 +18,14 @@
 # Uygulamanın zamanlanmış görevleri (günlük kur 10:00, veritabanı yedeği 03:00, temizlik) de buradan 10 dakikada bir çalışır.
 #
 # Kullanım (cPanel → Cron İşleri, tek satır):
-#   */15 * * * * SITE_URL=https://zenithdiag.com.tr WEBROOT=$HOME/public_html bash $HOME/zenith-ops/deploy.sh >> $HOME/zenith-ops/deploy.log 2>&1
+#   */15 * * * * SITE_URL=https://zenithdiag.com.tr WEBROOT=$HOME/zenithdiag.com.tr bash $HOME/zenith-ops/deploy.sh >> $HOME/zenith-ops/deploy.log 2>&1
 set -u
 umask 022
 
 REPO="${REPO:-akaresocial/zenith-yayin}"
 BRANCH="${BRANCH:-main}"
 SITE_URL="${SITE_URL:-https://zenithdiag.com.tr}"
-WEBROOT="${WEBROOT:-$HOME/public_html}"
+WEBROOT="${WEBROOT:-$HOME/zenithdiag.com.tr}"
 OPS="${OPS:-$HOME/zenith-ops}"
 DATA="${DATA:-$HOME/zenith-data}"
 BACKUPS="${BACKUPS:-$HOME/yedekler}"

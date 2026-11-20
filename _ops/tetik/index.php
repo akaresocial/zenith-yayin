@@ -18,11 +18,11 @@
 $CLI = PHP_SAPI === 'cli';
 // Yerel deneme için ortam değişkenleri YALNIZCA komut satırında okunur
 function ayar($k, $d) { global $CLI; $v = $CLI ? getenv($k) : false; return ($v === false || $v === '') ? $d : $v; }
-$HOME_DIR = ayar('HOME_DIR', '/home/thinktoo');
+$HOME_DIR = ayar('HOME_DIR', '/home/hedeftek');
 $REPO = 'akaresocial/zenith-yayin';
 $BRANCH = 'main';
 $SITE_URL = ayar('SITE_URL', 'https://zenithdiag.com.tr');
-$WEBROOT = ayar('WEBROOT', "$HOME_DIR/public_html");
+$WEBROOT = ayar('WEBROOT', "$HOME_DIR/zenithdiag.com.tr");
 $OPS = ayar('OPS', "$HOME_DIR/zenith-ops");
 $DATA = ayar('DATA', "$HOME_DIR/zenith-data");
 $TEST_SHA = ayar('TEST_SHA', '');
