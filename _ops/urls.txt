@@ -5,7 +5,7 @@
 /urun/zenith-z5/ 301 /urun/zenith-z5
 /karsilastir 200
 /rehber 200
-/rehber/zenith-z5-z7-lite-z7-pro-karsilastirma 200
+/rehber/ariza-tespit-cihazi-fiyati-neye-gore-degisir 200
 /sozluk 200
 /guncellemeler 200
 /llms.txt 200
