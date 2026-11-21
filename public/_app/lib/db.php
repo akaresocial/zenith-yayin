@@ -249,8 +249,64 @@ function db_schema_steps(): array
                 created_at TEXT NOT NULL
             )",
         ],
+        // 2: firma adresi vergi levhasına göre "No: 16 A"; vergi dairesi/no; yasal sayfalardaki sabit adres {{ADRES}} olur
+        [static function (PDO $pdo): void {
+            db_firma_bilgisi_2026_11($pdo);
+        }],
         // Yeni adımlar buraya, sona eklenir (ör. içerik paketi: db_icerik_uygula($pdo, __DIR__ . '/../icerik/<klasör>')).
     ];
+}
+
+/**
+ * Vergi levhasıyla uyum (2026-11-21): Ayarlar'daki adres eski "No: 16D" ise "No: 16 A" yapılır, vergi dairesi ve
+ * numarası boşsa levhadaki bilgiler yazılır; yasal sayfalarda elle yazılmış eski adres {{ADRES}} alanına çevrilir
+ * (adres artık yalnızca Ayarlar'dan gelir). Panelde zaten değiştirilmiş değerlere dokunmaz. Yeni kurulumda
+ * (ürün yokken) çalışmaz: başlangıç içeriği zaten güncel. Yalnızca PDO kullanır.
+ */
+function db_firma_bilgisi_2026_11(PDO $pdo): void
+{
+    if ((int) $pdo->query('SELECT COUNT(*) FROM products')->fetchColumn() === 0) {
+        return;
+    }
+    $eski = 'Kazımdirik Mah. 364/1 Sok. No: 16D, 35100 Bornova / İzmir';
+    $now = gmdate('Y-m-d\\TH:i:s\\Z');
+    $degisti = false;
+
+    $raw = $pdo->query("SELECT value FROM settings WHERE key = 'site'")->fetchColumn();
+    $s = $raw ? (json_decode((string) $raw, true) ?: []) : [];
+    $once = $s;
+    if (($s['address'] ?? $eski) === $eski) {
+        $s['address'] = 'Kazımdirik Mah. 364/1 Sok. No: 16 A, 35100 Bornova / İzmir';
+    }
+    if (trim((string) ($s['taxOffice'] ?? '')) === '' && trim((string) ($s['taxNumber'] ?? '')) === '') {
+        $s['taxOffice'] = 'Hasan Tahsin';
+        $s['taxNumber'] = '4610917318';
+    }
+    if ($s !== $once) {
+        $st = $pdo->prepare("INSERT INTO settings (key, value) VALUES ('site', ?) ON CONFLICT(key) DO UPDATE SET value = excluded.value");
+        $st->execute([json_encode($s, JSON_UNESCAPED_UNICODE)]);
+        $degisti = true;
+    }
+
+    $up = $pdo->prepare('UPDATE pages SET data = ?, updated_at = ? WHERE id = ?');
+    foreach ($pdo->query('SELECT id, data FROM pages')->fetchAll(PDO::FETCH_ASSOC) as $row) {
+        $data = json_decode((string) $row['data'], true) ?: [];
+        $html = (string) ($data['contentHtml'] ?? '');
+        if (!str_contains($html, $eski)) {
+            continue;
+        }
+        $data['contentHtml'] = str_replace($eski, '{{ADRES}}', $html);
+        $up->execute([json_encode($data, JSON_UNESCAPED_UNICODE), $now, (int) $row['id']]);
+        $degisti = true;
+    }
+
+    if ($degisti) {
+        // Statik vitrin yeni bilgilerle yeniden derlensin
+        $v = (int) ($pdo->query("SELECT value FROM meta WHERE key = 'content_version'")->fetchColumn() ?: 0) + 1;
+        $m = $pdo->prepare('INSERT INTO meta (key, value) VALUES (?, ?) ON CONFLICT(key) DO UPDATE SET value = excluded.value');
+        $m->execute(['content_version', (string) $v]);
+        $m->execute(['content_updated_at', $now]);
+    }
 }
 
 /**

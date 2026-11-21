@@ -16,7 +16,7 @@ function settings_defaults(): array
         'whatsappMessage' => 'Merhaba, Zenith arıza tespit cihazları hakkında bilgi almak istiyorum.',
         'email' => 'info@zenithdiag.com.tr',
         'supportEmail' => 'info@zenithdiag.com.tr',
-        'address' => 'Kazımdirik Mah. 364/1 Sok. No: 16D, 35100 Bornova / İzmir',
+        'address' => 'Kazımdirik Mah. 364/1 Sok. No: 16 A, 35100 Bornova / İzmir',
         'mapsUrl' => '',
         'social' => ['instagram' => '', 'youtube' => '', 'facebook' => '', 'linkedin' => ''],
         'orderNotificationEmails' => [],
