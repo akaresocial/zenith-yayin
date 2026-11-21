@@ -253,8 +253,69 @@ function db_schema_steps(): array
         [static function (PDO $pdo): void {
             db_firma_bilgisi_2026_11($pdo);
         }],
+        // 3: liste fiyatları %50 artırıldı (Z5 1725, Z7 Lite 2550, Z7 Pro 3150 USD) ve metinlerdeki USD fiyatlar
+        [static function (PDO $pdo): void {
+            db_fiyat_artisi_2026_11($pdo);
+        }],
         // Yeni adımlar buraya, sona eklenir (ör. içerik paketi: db_icerik_uygula($pdo, __DIR__ . '/../icerik/<klasör>')).
     ];
+}
+
+/**
+ * Fiyat artışı (2026-11-21, %50): USD liste fiyatı hâlâ eski değerdeyse yenisi yazılır ve o ürünün metinlerindeki
+ * (ör. SSS) "x ABD doları" ifadesi güncellenir; karşılaştırma rehberindeki fiyat tablosu ve satırı da değişir.
+ * Panelde elle değiştirilmiş fiyatlara dokunmaz. Kur marjı (markupPercent) 0 kalır: artış kura değil fiyata uygulanır,
+ * böylece sitede gösterilen TCMB kuru doğru kalır. Yalnızca PDO kullanır.
+ */
+function db_fiyat_artisi_2026_11(PDO $pdo): void
+{
+    if ((int) $pdo->query('SELECT COUNT(*) FROM products')->fetchColumn() === 0) {
+        return;
+    }
+    $fiyatlar = [
+        'zenith-z5' => [1150, 1725, '1.150 ABD', '1.725 ABD'],
+        'zenith-z7-lite' => [1700, 2550, '1.700 ABD', '2.550 ABD'],
+        'zenith-z7-pro' => [2100, 3150, '2.100 ABD', '3.150 ABD'],
+    ];
+    $now = gmdate('Y-m-d\\TH:i:s\\Z');
+    $degisti = false;
+    $sec = $pdo->prepare('SELECT id, price_usd, data FROM products WHERE slug = ?');
+    $up = $pdo->prepare('UPDATE products SET price_usd = ?, data = ?, updated_at = ? WHERE id = ?');
+    foreach ($fiyatlar as $slug => [$eski, $yeni, $eskiMetin, $yeniMetin]) {
+        $sec->execute([$slug]);
+        $row = $sec->fetch(PDO::FETCH_ASSOC);
+        if (!$row || abs((float) $row['price_usd'] - $eski) > 0.001) {
+            continue;
+        }
+        $up->execute([$yeni, str_replace($eskiMetin, $yeniMetin, (string) $row['data']), $now, (int) $row['id']]);
+        $degisti = true;
+    }
+
+    $sec = $pdo->prepare('SELECT id, data FROM posts WHERE slug = ?');
+    $sec->execute(['zenith-z5-z7-lite-z7-pro-karsilastirma']);
+    $row = $sec->fetch(PDO::FETCH_ASSOC);
+    if ($row) {
+        // JSON içinde "/" kaçışlı saklanabilir: metin çözülüp değiştirilir
+        $data = json_decode((string) $row['data'], true) ?: [];
+        $html = (string) ($data['contentHtml'] ?? '');
+        $yeni = str_replace(
+            ['<td>1.150 USD</td><td>1.700 USD</td><td>2.100 USD</td>', '1.150 / 1.700 / 2.100 USD'],
+            ['<td>1.725 USD</td><td>2.550 USD</td><td>3.150 USD</td>', '1.725 / 2.550 / 3.150 USD'],
+            $html,
+        );
+        if ($yeni !== $html) {
+            $data['contentHtml'] = $yeni;
+            $pdo->prepare('UPDATE posts SET data = ?, updated_at = ? WHERE id = ?')->execute([json_encode($data, JSON_UNESCAPED_UNICODE), $now, (int) $row['id']]);
+            $degisti = true;
+        }
+    }
+
+    if ($degisti) {
+        $v = (int) ($pdo->query("SELECT value FROM meta WHERE key = 'content_version'")->fetchColumn() ?: 0) + 1;
+        $m = $pdo->prepare('INSERT INTO meta (key, value) VALUES (?, ?) ON CONFLICT(key) DO UPDATE SET value = excluded.value');
+        $m->execute(['content_version', (string) $v]);
+        $m->execute(['content_updated_at', $now]);
+    }
 }
 
 /**
