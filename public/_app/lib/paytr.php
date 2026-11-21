@@ -15,7 +15,7 @@ function paytr_config(): array
 {
     $c = paytr_settings();
     if ($c['merchantId'] === '' || $c['merchantKey'] === '' || $c['merchantSalt'] === '') {
-        throw new UserError('Kartla ödeme henüz yapılandırılmadı. Lütfen havale/EFT ile ödeyin veya bize ulaşın.', 503);
+        throw new UserError('Kartla ödeme şu an kullanılamıyor. Siparişiniz için WhatsApp ya da telefonla bize ulaşın.', 503);
     }
     return $c;
 }

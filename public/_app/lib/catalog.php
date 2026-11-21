@@ -289,5 +289,5 @@ function catalog_live(): array
             'published' => (bool) $r['published'],
         ];
     }
-    return ['rate' => $rate, 'products' => $items];
+    return ['rate' => $rate, 'products' => $items, 'payment' => ['card' => card_payment_available()]];
 }

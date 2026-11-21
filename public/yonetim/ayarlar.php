@@ -26,6 +26,8 @@ if (is_post()) {
             }
             paytr_settings_save($patch);
             meta_set('paytr_iframe_unavailable_until', '0');
+            // Sitedeki kart seçeneği ve "PayTR ile ödeme" ifadeleri bu bilgilere bağlı: site yeniden derlensin
+            content_touch();
             flash('success', 'PayTR bilgileri kaydedildi.');
         } elseif ($action === 'smtp') {
             $patch = [

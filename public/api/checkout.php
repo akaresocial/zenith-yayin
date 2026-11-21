@@ -16,8 +16,8 @@ api_run(function (): void {
         json_fail('Geçersiz istek', 400);
     }
     $s = settings();
-    if ($d['paymentMethod'] === 'card' && !$s['cardEnabled']) {
-        json_fail('Kartla ödeme şu an kullanılamıyor.', 400);
+    if ($d['paymentMethod'] === 'card' && !card_payment_available()) {
+        json_fail('Kartla ödeme şu an kullanılamıyor. Siparişinizi WhatsApp ile verebilirsiniz.', 400);
     }
     if ($d['paymentMethod'] === 'bank_transfer' && !$s['transferEnabled']) {
         json_fail('Havale/EFT şu an kullanılamıyor.', 400);

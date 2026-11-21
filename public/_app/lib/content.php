@@ -142,7 +142,8 @@ function content_export(): array
         'version' => 1,
         'contentVersion' => content_version()['version'],
         'exportedAt' => now_iso(),
-        'settings' => settings_public(),
+        // cardReady: kartla ödeme açık ve PayTR bilgileri girilmiş mi (bilgilerin kendisi asla aktarılmaz)
+        'settings' => settings_public() + ['cardReady' => card_payment_available()],
         'categories' => categories_all(),
         'products' => products_all(true),
         'posts' => posts_all(true),

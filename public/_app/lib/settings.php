@@ -110,6 +110,16 @@ function paytr_settings_save(array $patch): void
     q("INSERT INTO settings (key, value) VALUES ('paytr', ?) ON CONFLICT(key) DO UPDATE SET value = excluded.value", [json_encode($next, JSON_UNESCAPED_UNICODE)]);
 }
 
+/**
+ * Kartla ödeme gerçekten alınabiliyor mu: panelde açık VE PayTR mağaza bilgileri girilmiş. Değilse sitede kart seçeneği
+ * ve "PayTR ile ödeme" ifadeleri gizlenir, sipariş WhatsApp ile alınır.
+ */
+function card_payment_available(): bool
+{
+    $c = paytr_settings();
+    return !empty(settings()['cardEnabled']) && $c['merchantId'] !== '' && $c['merchantKey'] !== '' && $c['merchantSalt'] !== '';
+}
+
 /** SMTP ile gönderim (isteğe bağlı): şifre girilmişse e-postalar mail() yerine bu posta kutusundan gider. Yalnızca veritabanında saklanır. */
 function smtp_settings(): array
 {
