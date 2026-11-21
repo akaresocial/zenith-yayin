@@ -6,7 +6,7 @@ Satış koşulları:
 - Fiyatlar USD bazlıdır; her gün T.C. Merkez Bankası döviz satış kuruyla TL’ye çevrilir, kuruş gösterilmez, son hane yukarı 10’a yuvarlanır. KDV dahildir.
 - Bu dosya üretildiğinde kur: 1 USD = 50,4936 TL (20.11.2026). Güncel fiyat ürün sayfasındadır.
 - 2 yıl garanti. Türkiye geneli ücretsiz kargo. Sipariş: sepetten WhatsApp ile; ödeme ve teslimat WhatsApp’ta netleştirilir.
-- İletişim: telefon 0850 346 58 18, WhatsApp 0532 459 51 90, e-posta info@zenithdiag.com.tr, adres Kazımdirik Mah. 364/1 Sok. No: 16D, 35100 Bornova / İzmir.
+- İletişim: telefon 0850 346 58 18, WhatsApp 0532 459 51 90, e-posta info@zenithdiag.com.tr, adres Kazımdirik Mah. 364/1 Sok. No: 16 A, 35100 Bornova / İzmir.
 
 ## Ürünler
 - [Zenith Z5](https://zenithdiag.com.tr/urun/zenith-z5): Zenith Z5, ayrı VCI kullanmadan ana DLC kablosuyla araca bağlanan, 8 inç ekranlı ve yaklaşık 680 gram ağırlığında hepsi bir arada bir arıza tespit cihazıdır. Tam sistem taraması, çift yönlü testler ve servis işlevlerinin yanında J2534 Pass-Thru ve 24V ticari araç desteği sunar; kompakt bir cihazda programlama seçeneğini de isteyen atölyelere hitap eder. Liste fiyatı 1150 USD; bugünkü fiyat 58.070 TL (KDV dahil).
