@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:g="http://base.google.com/ns/1.0">
+<channel>
+<title>Zenith Türkiye</title>
+<link>https://zenithdiag.com.tr</link>
+<description>Zenith Z5, Z7 Lite ve Z7 Pro arıza tespit cihazları — KDV dahil TL fiyatlar</description>
+<item>
+<g:id>ZENITH-Z5</g:id>
+<g:title>Zenith Z5 Arıza Tespit Cihazı</g:title>
+<g:description>Zenith Z5, ayrı VCI kullanmadan ana DLC kablosuyla araca bağlanan, 8 inç ekranlı ve yaklaşık 680 gram ağırlığında hepsi bir arada bir arıza tespit cihazıdır. Tam sistem taraması, çift yönlü testler ve servis işlevlerinin yanında J2534 Pass-Thru ve 24V ticari araç desteği sunar; kompakt bir cihazda programlama seçeneğini de isteyen atölyelere hitap eder.</g:description>
+<g:link>https://zenithdiag.com.tr/urun/zenith-z5</g:link>
+<g:image_link>https://zenithdiag.com.tr/uploads/z5-aci-1280.webp</g:image_link>
+<g:additional_image_link>https://zenithdiag.com.tr/uploads/z5-on.webp</g:additional_image_link>
+<g:additional_image_link>https://zenithdiag.com.tr/uploads/z5-on-2.webp</g:additional_image_link>
+<g:additional_image_link>https://zenithdiag.com.tr/uploads/z5-acik-tema.webp</g:additional_image_link>
+<g:additional_image_link>https://zenithdiag.com.tr/uploads/z5-arka-1280.webp</g:additional_image_link>
+<g:additional_image_link>https://zenithdiag.com.tr/uploads/z5-arka-aci-1280.webp</g:additional_image_link>
+<g:availability>in_stock</g:availability>
+<g:price>87450.00 TRY</g:price>
+<g:condition>new</g:condition>
+<g:brand>Zenith</g:brand>
+<g:identifier_exists>no</g:identifier_exists>
+<g:product_type>Arıza Tespit Cihazları &gt; Zenith</g:product_type>
+<g:shipping><g:country>TR</g:country><g:price>0.00 TRY</g:price><g:min_handling_time>1</g:min_handling_time><g:max_handling_time>3</g:max_handling_time></g:shipping>
+</item>
+<item>
+<g:id>ZENITH-Z7-LITE</g:id>
+<g:title>Zenith Z7 Lite (Z7) Kablosuz Arıza Tespit Cihazı</g:title>
+<g:description>Zenith Z7 Lite, 10,1 inç Android tablet ile araç soketine bağlanan Bluetooth 5.0 kablosuz VCI'dan (ZVCI) oluşan çok markalı bir teşhis sistemidir. Topoloji taraması, canlı veri ve grafikli aktif testler, servis işlevleri, EV/HEV batarya verileri ve AutoAuth üzerinden FCA SGW erişimi sunar; J2534 programlama ve CAN-FD/DoIP gerektirmeyen atölyeler için Z7 ailesinin giriş modelidir.</g:description>
+<g:link>https://zenithdiag.com.tr/urun/zenith-z7-lite</g:link>
+<g:image_link>https://zenithdiag.com.tr/uploads/z7lite-set.webp</g:image_link>
+<g:additional_image_link>https://zenithdiag.com.tr/uploads/z7lite-aci.webp</g:additional_image_link>
+<g:additional_image_link>https://zenithdiag.com.tr/uploads/z7lite-arka.webp</g:additional_image_link>
+<g:additional_image_link>https://zenithdiag.com.tr/uploads/zvci.webp</g:additional_image_link>
+<g:additional_image_link>https://zenithdiag.com.tr/uploads/ui-topoloji-1280.webp</g:additional_image_link>
+<g:additional_image_link>https://zenithdiag.com.tr/uploads/ui-bms.webp</g:additional_image_link>
+<g:availability>in_stock</g:availability>
+<g:price>129280.00 TRY</g:price>
+<g:condition>new</g:condition>
+<g:brand>Zenith</g:brand>
+<g:identifier_exists>no</g:identifier_exists>
+<g:product_type>Arıza Tespit Cihazları &gt; Zenith</g:product_type>
+<g:shipping><g:country>TR</g:country><g:price>0.00 TRY</g:price><g:min_handling_time>1</g:min_handling_time><g:max_handling_time>3</g:max_handling_time></g:shipping>
+</item>
+<item>
+<g:id>ZENITH-Z7-PRO</g:id>
+<g:title>Zenith Z7 Pro Arıza Tespit Cihazı (CAN-FD, DoIP, J2534)</g:title>
+<g:description>Zenith Z7 Pro, Z7 serisinin 10,1 inç tabletini araç voltajı göstergeli ZVCI2 arayüzüyle birleştiren en kapsamlı Zenith modelidir. Topoloji, canlı veri, servis işlevleri, EV/HEV batarya ve FCA SGW (AutoAuth) özelliklerine ek olarak dahili CAN-FD, DoIP By-Pass ve J2534 Pass-Thru desteği sunar; yeni nesil araçlarla çalışan ve OEM yazılımıyla programlama yapan atölyeler içindir.</g:description>
+<g:link>https://zenithdiag.com.tr/urun/zenith-z7-pro</g:link>
+<g:image_link>https://zenithdiag.com.tr/uploads/z7pro-set.webp</g:image_link>
+<g:additional_image_link>https://zenithdiag.com.tr/uploads/z7pro-stand.webp</g:additional_image_link>
+<g:additional_image_link>https://zenithdiag.com.tr/uploads/z7pro-aci.webp</g:additional_image_link>
+<g:additional_image_link>https://zenithdiag.com.tr/uploads/z7pro-arka.webp</g:additional_image_link>
+<g:additional_image_link>https://zenithdiag.com.tr/uploads/zvci2.webp</g:additional_image_link>
+<g:additional_image_link>https://zenithdiag.com.tr/uploads/ui-j2534-1280.webp</g:additional_image_link>
+<g:additional_image_link>https://zenithdiag.com.tr/uploads/ui-topoloji-1280.webp</g:additional_image_link>
+<g:availability>in_stock</g:availability>
+<g:price>159700.00 TRY</g:price>
+<g:condition>new</g:condition>
+<g:brand>Zenith</g:brand>
+<g:identifier_exists>no</g:identifier_exists>
+<g:product_type>Arıza Tespit Cihazları &gt; Zenith</g:product_type>
+<g:shipping><g:country>TR</g:country><g:price>0.00 TRY</g:price><g:min_handling_time>1</g:min_handling_time><g:max_handling_time>3</g:max_handling_time></g:shipping>
+</item>
+</channel>
+</rss>

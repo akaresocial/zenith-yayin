@@ -257,6 +257,29 @@ function db_schema_steps(): array
         [static function (PDO $pdo): void {
             db_fiyat_artisi_2026_11($pdo);
         }],
+        // 4: ana sayfa başlığı/açıklaması Google sınırına sığsın (60 / 160 karakter); panelde değiştirilmişse dokunmaz
+        [static function (PDO $pdo): void {
+            $raw = $pdo->query("SELECT value FROM settings WHERE key = 'site'")->fetchColumn();
+            $s = $raw ? (json_decode((string) $raw, true) ?: []) : [];
+            if (!$s) {
+                return;
+            }
+            $once = $s;
+            if (($s['defaultTitle'] ?? '') === 'Zenith Türkiye | Zenith Z5, Z7 Lite ve Z7 Pro Arıza Tespit Cihazları') {
+                $s['defaultTitle'] = 'Zenith Türkiye: Z5, Z7 Lite ve Z7 Pro Arıza Tespit Cihazları';
+            }
+            if (($s['defaultDescription'] ?? '') === 'Zenith Z5, Z7 Lite ve Z7 Pro çok markalı arıza tespit cihazları: topoloji taraması, J2534, CAN-FD/DoIP, 24V ve EV batarya analizi. 2 yıl garanti, ücretsiz kargo.') {
+                $s['defaultDescription'] = 'Zenith Z5, Z7 Lite ve Z7 Pro çok markalı arıza tespit cihazları: topoloji taraması, J2534, CAN-FD/DoIP, 24V ve EV batarya analizi. 2 yıl garanti.';
+            }
+            if ($s === $once) {
+                return;
+            }
+            $pdo->prepare("INSERT INTO settings (key, value) VALUES ('site', ?) ON CONFLICT(key) DO UPDATE SET value = excluded.value")->execute([json_encode($s, JSON_UNESCAPED_UNICODE)]);
+            $v = (int) ($pdo->query("SELECT value FROM meta WHERE key = 'content_version'")->fetchColumn() ?: 0) + 1;
+            $m = $pdo->prepare('INSERT INTO meta (key, value) VALUES (?, ?) ON CONFLICT(key) DO UPDATE SET value = excluded.value');
+            $m->execute(['content_version', (string) $v]);
+            $m->execute(['content_updated_at', gmdate('Y-m-d\\TH:i:s\\Z')]);
+        }],
         // Yeni adımlar buraya, sona eklenir (ör. içerik paketi: db_icerik_uygula($pdo, __DIR__ . '/../icerik/<klasör>')).
     ];
 }
