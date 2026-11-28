@@ -133,6 +133,8 @@ jobs:
         run: |
           set -euo pipefail
           cd yayin
+          # Önceki yayının sayfa özetleri: IndexNow yalnız değişen sayfaları bildirsin
+          cp _ops/sayfalar.json "$RUNNER_TEMP/sayfalar-onceki.json" 2>/dev/null || true
           rm -rf public _ops README.md
           cp -a ../src/dist/public ../src/dist/_ops ../src/dist/README.md .
           git config user.name "zenith-yayin"
@@ -183,6 +185,16 @@ jobs:
             fi
           done
           echo "::warning::Tetik 5 dakikada doğrulanamadı; sunucu 15 dakika içinde cron ile kuracak"
+
+      # Bing, Yandex vb.'ye (IndexNow) içeriği değişen/yeni sayfaları bildirir; site bu sürümü sunmuyorsa bildirmez.
+      - name: IndexNow
+        if: steps.push.outputs.sha != ''
+        continue-on-error: true
+        timeout-minutes: 3
+        working-directory: src
+        env:
+          SITE_URL: ${{ env.SITE_URL }}
+        run: node scripts/indexnow.mjs "$RUNNER_TEMP/sayfalar-onceki.json" dist/_ops
 
       # Yayın öncesi (ICERIK_KAYNAGI=tohum): sunucunun ilk kurulumda yüklediği içerik (seed dalı: snapshot.json + görseller)
       # tohumla birlikte güncel tutulur. Yalnızca içerik ya da görseller değiştiyse gönderilir.
